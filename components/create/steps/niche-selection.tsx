@@ -109,7 +109,7 @@ export function NicheSelection({ onContinue, onBack, selectedNiche: initialNiche
                 </TabsContent>
             </Tabs>
 
-            <div className="flex justify-between items-center pt-4">
+            <div className={cn("flex items-center pt-4", onBack ? "justify-between" : "justify-end")}>
                 {onBack && (
                     <Button
                         variant="ghost"

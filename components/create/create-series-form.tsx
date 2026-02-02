@@ -25,12 +25,10 @@ export function CreateSeriesForm() {
     }, []);
 
     const handleBack = useCallback(() => {
-        if (currentStep === 1) {
-            router.push("/dashboard");
-        } else {
+        if (currentStep > 1) {
             setCurrentStep((prev) => (prev - 1) as Step);
         }
-    }, [currentStep, router]);
+    }, [currentStep]);
 
     return (
         <div className="mx-auto max-w-4xl space-y-4">
@@ -40,7 +38,6 @@ export function CreateSeriesForm() {
                 {currentStep === 1 && (
                     <NicheSelection
                         onContinue={handleNicheSelect}
-                        onBack={handleBack}
                         selectedNiche={formData.nicheId}
                     />
                 )}
