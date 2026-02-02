@@ -26,7 +26,7 @@ export function NicheSelection({ onContinue, selectedNiche: initialNiche }: Nich
     const [selected, setSelected] = useState<string | undefined>(initialNiche);
 
     return (
-        <div className="mx-auto max-w-2xl space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+        <div className="mx-auto max-w-3xl space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
             <div className="space-y-2">
                 <h2 className="text-2xl font-black uppercase tracking-tight text-white sm:text-3xl">
                     Choose your <span className="text-volt">Niche</span>
@@ -46,49 +46,52 @@ export function NicheSelection({ onContinue, selectedNiche: initialNiche }: Nich
                     </TabsTrigger>
                 </TabsList>
 
-                <TabsContent value="available" className="mt-6 space-y-6 outline-none">
-                    <ScrollArea className="h-[400px] w-full pr-4 rounded-xl">
-                        <div className="grid gap-4">
-                            {availableNiches.map((niche) => {
-                                const isSelected = selected === niche.id;
-                                return (
-                                    <Card
-                                        key={niche.id}
-                                        className={cn(
-                                            "group relative flex cursor-pointer items-center gap-4 border border-white/5 bg-noir-900/50 p-6 transition-all hover:border-volt/30 hover:bg-noir-800/80",
-                                            isSelected && "border-volt/50 bg-volt/5 ring-1 ring-volt/20"
-                                        )}
-                                        onClick={() => setSelected(niche.id)}
-                                    >
-                                        <div className={cn(
-                                            "flex h-12 w-12 items-center justify-center rounded-xl transition-all duration-300",
-                                            isSelected ? "bg-volt text-noir-950" : "bg-white/5 text-neutral-400 group-hover:bg-white/10 group-hover:text-white"
+                <TabsContent value="available" className="mt-6 outline-none">
+                    <div className="grid gap-4 grid-cols-2 md:grid-cols-3">
+                        {availableNiches.map((niche) => {
+                            const isSelected = selected === niche.id;
+                            return (
+                                <Card
+                                    key={niche.id}
+                                    className={cn(
+                                        "group relative flex flex-col items-center justify-center gap-3 overflow-hidden border border-white/5 bg-noir-900/50 p-5 text-center transition-all hover:border-volt/30 hover:bg-noir-800/80",
+                                        isSelected && "border-volt/50 bg-volt/5 ring-1 ring-volt/20 shadow-[0_0_20px_rgba(221,255,85,0.1)]"
+                                    )}
+                                    onClick={() => setSelected(niche.id)}
+                                >
+                                    <div className={cn(
+                                        "flex h-12 w-12 items-center justify-center rounded-xl transition-all duration-300",
+                                        isSelected ? "bg-volt text-noir-950" : "bg-white/5 text-neutral-400 group-hover:bg-white/10 group-hover:text-white"
+                                    )}>
+                                        <niche.icon className="h-6 w-6" />
+                                    </div>
+
+                                    <div className="space-y-1">
+                                        <h4 className={cn(
+                                            "text-sm font-bold transition-colors",
+                                            isSelected ? "text-white" : "text-neutral-300 group-hover:text-white"
                                         )}>
-                                            <niche.icon className="h-6 w-6" />
-                                        </div>
+                                            {niche.name}
+                                        </h4>
+                                        <p className="text-[11px] leading-tight text-neutral-500 line-clamp-2">
+                                            {niche.description}
+                                        </p>
+                                    </div>
 
-                                        <div className="flex-1 space-y-1">
-                                            <h4 className={cn(
-                                                "font-bold transition-colors",
-                                                isSelected ? "text-white" : "text-neutral-300 group-hover:text-white"
-                                            )}>
-                                                {niche.name}
-                                            </h4>
-                                            <p className="text-sm text-neutral-500 line-clamp-1">
-                                                {niche.description}
-                                            </p>
+                                    {isSelected && (
+                                        <div className="absolute right-2 top-2 flex h-5 w-5 items-center justify-center rounded-full bg-volt text-noir-950 shadow-[0_0_10px_rgba(221,255,85,0.4)]">
+                                            <Check className="h-3 w-3 stroke-[3px]" />
                                         </div>
+                                    )}
 
-                                        {isSelected && (
-                                            <div className="flex h-6 w-6 items-center justify-center rounded-full bg-volt text-noir-950 shadow-[0_0_10px_rgba(221,255,85,0.4)]">
-                                                <Check className="h-4 w-4 stroke-[3px]" />
-                                            </div>
-                                        )}
-                                    </Card>
-                                );
-                            })}
-                        </div>
-                    </ScrollArea>
+                                    {/* Bottom selection bar */}
+                                    {isSelected && (
+                                        <div className="absolute bottom-0 left-0 h-1 w-full bg-volt" />
+                                    )}
+                                </Card>
+                            );
+                        })}
+                    </div>
                 </TabsContent>
 
                 <TabsContent value="custom" className="mt-6 outline-none">
