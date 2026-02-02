@@ -22,10 +22,10 @@ export function CreateSeriesForm() {
     }, []);
 
     return (
-        <div className="mx-auto max-w-4xl space-y-10">
+        <div className="mx-auto max-w-4xl space-y-4">
             <StepIndicator currentStep={currentStep} totalSteps={totalSteps} />
 
-            <div className="relative min-h-[500px]">
+            <div className="relative">
                 {currentStep === 1 && (
                     <NicheSelection
                         onContinue={handleNicheSelect}
