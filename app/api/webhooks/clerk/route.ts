@@ -24,9 +24,8 @@ export async function POST(req: Request) {
         })
     }
 
-    // Get the body
-    const payload = await req.json()
-    const body = JSON.stringify(payload)
+    // Get the raw body for Svix verification
+    const body = await req.text()
 
     // Create a new Svix instance with your secret.
     const wh = new Webhook(WEBHOOK_SECRET)
@@ -57,7 +56,7 @@ export async function POST(req: Request) {
         const primaryEmail = email_addresses.find(email => email.id === (evt.data as any).primary_email_address_id)?.email_address
         const name = `${first_name || ''} ${last_name || ''}`.trim()
 
-        console.log(`Syncing user ${id}: ${name} (${primaryEmail})`)
+        console.log(`Syncing user ${id}`)
 
         try {
             await upsertUser({

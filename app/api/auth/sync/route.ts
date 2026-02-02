@@ -14,9 +14,14 @@ export async function POST() {
             email => email.id === user.primaryEmailAddressId
         )?.emailAddress
 
+        // Guard: require email for sync (phone-only users not supported)
+        if (!primaryEmail) {
+            return NextResponse.json({ error: 'Missing email address' }, { status: 400 })
+        }
+
         const name = `${user.firstName || ''} ${user.lastName || ''}`.trim()
 
-        console.log(`Auto-syncing user ${user.id}: ${name} (${primaryEmail})`)
+        console.log(`Auto-syncing user ${user.id}`)
 
         await upsertUser({
             id: user.id,

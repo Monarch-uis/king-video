@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { SignInButton, SignUpButton, UserButton, SignedIn, SignedOut } from "@clerk/nextjs";
+import Link from "next/link";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -50,11 +51,11 @@ export default function Home() {
               </SignUpButton>
             </SignedOut>
             <SignedIn>
-              <a href="/dashboard">
+              <Link href="/dashboard">
                 <Button variant="ghost" className="hidden transition-colors hover:text-volt sm:inline-flex cursor-pointer mr-2">
                   Dashboard
                 </Button>
-              </a>
+              </Link>
               <UserButton />
             </SignedIn>
           </div>
@@ -91,11 +92,11 @@ export default function Home() {
                 </SignUpButton>
               </SignedOut>
               <SignedIn>
-                <a href="/dashboard">
+                <Link href="/dashboard">
                   <Button size="lg" className="h-14 bg-volt px-10 text-lg font-black uppercase tracking-widest text-noir-950 transition-all hover:scale-105 hover:bg-volt/90 cursor-pointer">
                     Go to Dashboard <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
-                </a>
+                </Link>
               </SignedIn>
               <Button size="lg" variant="outline" className="h-14 border-white/10 px-10 text-lg font-bold backdrop-blur-sm transition-all hover:border-volt/50 hover:bg-volt/5">
                 <Play className="mr-2 h-4 w-4 fill-foreground" /> Watch Demo
