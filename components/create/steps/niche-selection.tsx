@@ -19,10 +19,11 @@ const availableNiches = [
 
 interface NicheSelectionProps {
     onContinue: (nicheId: string) => void;
+    onBack?: () => void;
     selectedNiche?: string;
 }
 
-export function NicheSelection({ onContinue, selectedNiche: initialNiche }: NicheSelectionProps) {
+export function NicheSelection({ onContinue, onBack, selectedNiche: initialNiche }: NicheSelectionProps) {
     const [selected, setSelected] = useState<string | undefined>(initialNiche);
 
     return (
@@ -108,7 +109,16 @@ export function NicheSelection({ onContinue, selectedNiche: initialNiche }: Nich
                 </TabsContent>
             </Tabs>
 
-            <div className="flex justify-end pt-4">
+            <div className="flex justify-between items-center pt-4">
+                {onBack && (
+                    <Button
+                        variant="ghost"
+                        onClick={onBack}
+                        className="h-12 px-8 text-neutral-500 hover:text-white hover:bg-white/5 font-bold uppercase tracking-widest transition-all"
+                    >
+                        Back
+                    </Button>
+                )}
                 <Button
                     disabled={!selected}
                     onClick={() => selected && onContinue(selected)}
