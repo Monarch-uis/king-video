@@ -47,12 +47,14 @@ export function Sidebar() {
 
             {/* Primary Action */}
             <div className="px-6 py-4">
-                <button className="group relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-volt px-6 py-4 text-noir-950 shadow-[0_0_20px_rgba(221,255,85,0.2)] transition-all hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(221,255,85,0.4)] active:scale-95">
-                    <Plus className="relative h-5 w-5 transition-transform duration-300 group-hover:rotate-90" />
-                    <span className="relative font-bold uppercase tracking-wider">
-                        New Series
-                    </span>
-                </button>
+                <Link href="/dashboard/create">
+                    <button className="group relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-volt px-6 py-4 text-noir-950 shadow-[0_0_20px_rgba(221,255,85,0.2)] transition-all hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(221,255,85,0.4)] active:scale-95">
+                        <Plus className="relative h-5 w-5 transition-transform duration-300 group-hover:rotate-90" />
+                        <span className="relative font-bold uppercase tracking-wider">
+                            New Series
+                        </span>
+                    </button>
+                </Link>
             </div>
 
             {/* Navigation */}
