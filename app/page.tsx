@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { SignInButton, SignUpButton, UserButton, SignedIn, SignedOut } from "@clerk/nextjs";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -36,12 +37,26 @@ export default function Home() {
             <a href="#pricing" className="transition-colors hover:text-volt">Pricing</a>
           </div>
           <div className="flex items-center gap-4">
-            <Button variant="ghost" className="hidden transition-colors hover:text-volt sm:inline-flex">
-              Sign In
-            </Button>
-            <Button className="bg-volt text-noir-950 hover:bg-volt/90 font-bold uppercase tracking-wider">
-              Get Started
-            </Button>
+            <SignedOut>
+              <SignInButton>
+                <Button variant="ghost" className="hidden transition-colors hover:text-volt sm:inline-flex cursor-pointer">
+                  Sign In
+                </Button>
+              </SignInButton>
+              <SignUpButton>
+                <Button className="bg-volt text-noir-950 hover:bg-volt/90 font-bold uppercase tracking-wider cursor-pointer">
+                  Get Started
+                </Button>
+              </SignUpButton>
+            </SignedOut>
+            <SignedIn>
+              <a href="/dashboard">
+                <Button variant="ghost" className="hidden transition-colors hover:text-volt sm:inline-flex cursor-pointer mr-2">
+                  Dashboard
+                </Button>
+              </a>
+              <UserButton />
+            </SignedIn>
           </div>
         </div>
       </nav>
@@ -68,9 +83,20 @@ export default function Home() {
               autoschedules high-retention shorts across every social platform.
             </p>
             <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Button size="lg" className="h-14 bg-volt px-10 text-lg font-black uppercase tracking-widest text-noir-950 transition-all hover:scale-105 hover:bg-volt/90">
-                Start Generating <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
+              <SignedOut>
+                <SignUpButton>
+                  <Button size="lg" className="h-14 bg-volt px-10 text-lg font-black uppercase tracking-widest text-noir-950 transition-all hover:scale-105 hover:bg-volt/90 cursor-pointer">
+                    Start Generating <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                </SignUpButton>
+              </SignedOut>
+              <SignedIn>
+                <a href="/dashboard">
+                  <Button size="lg" className="h-14 bg-volt px-10 text-lg font-black uppercase tracking-widest text-noir-950 transition-all hover:scale-105 hover:bg-volt/90 cursor-pointer">
+                    Go to Dashboard <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                </a>
+              </SignedIn>
               <Button size="lg" variant="outline" className="h-14 border-white/10 px-10 text-lg font-bold backdrop-blur-sm transition-all hover:border-volt/50 hover:bg-volt/5">
                 <Play className="mr-2 h-4 w-4 fill-foreground" /> Watch Demo
               </Button>
