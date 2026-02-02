@@ -59,7 +59,9 @@ export function Sidebar() {
             <div className="flex-1 overflow-y-auto px-4 py-4">
                 <nav className="flex flex-col gap-2">
                     {menuItems.map((item) => {
-                        const isActive = pathname === item.href;
+                        const isActive = item.href === "/dashboard"
+                            ? pathname === item.href
+                            : pathname.startsWith(item.href);
                         return (
                             <Link
                                 key={item.href}
